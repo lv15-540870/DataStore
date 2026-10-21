@@ -53,4 +53,17 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.4")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.4")
+    implementation("androidx.activity:activity-compose:1.9.1")
+    implementation("androidx.compose.material3:material3:1.2.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+
+    //OnBoarding-01
+
+    implementation("com.google.accompanist:accompanist-paper:0.15.0")
+
+    implementation("com.airbnb,android:lottie-compose:5.2.0")
+
+
 }
