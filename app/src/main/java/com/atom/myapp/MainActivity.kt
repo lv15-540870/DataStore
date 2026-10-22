@@ -7,8 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.material3.MaterialTheme
 import androidx.datastore.preferences.preferencesDataStore
 import com.atom.myapp.views.AppNavigation
-
-// Inicialización de DataStore (tu LocalStorage)
 val Context.dataStore by preferencesDataStore(name = "user_prefs")
 
 class MainActivity : ComponentActivity() {

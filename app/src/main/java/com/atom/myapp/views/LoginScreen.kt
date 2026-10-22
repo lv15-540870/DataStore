@@ -15,11 +15,11 @@ import com.atom.myapp.R
 @Composable
 fun LoginScreen(
     onNavigateToRegister: () -> Unit,
-    onLoginClick: (String, String) -> Boolean // Devuelve true si el login es exitoso, false si falla
+    onLoginClick: (String, String) -> Boolean
 ) {
     var nombre by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var showError by remember { mutableStateOf(false) } // Controla si mostramos el error
+    var showError by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.fillMaxSize().padding(32.dp),
@@ -39,9 +39,9 @@ fun LoginScreen(
             value = nombre,
             onValueChange = {
                 nombre = it
-                showError = false // Oculta el error al volver a escribir
+                showError = false
             },
-            label = { Text("NOMBRE:") },
+            label = { Text("Nombre:") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -51,12 +51,11 @@ fun LoginScreen(
                 password = it
                 showError = false
             },
-            label = { Text("PASSWORD:") },
+            label = { Text("Password:") },
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth()
         )
 
-        // Mensaje de error condicional
         if (showError) {
             Spacer(modifier = Modifier.height(8.dp))
             Text(
@@ -68,30 +67,28 @@ fun LoginScreen(
 
         Spacer(modifier = Modifier.height(30.dp))
 
-        // NUEVO BOTÓN PARA INGRESAR
         Button(
             onClick = {
-                // Ejecutamos la validación que viene desde AppNavigation
                 val loginExitoso = onLoginClick(nombre, password)
                 if (!loginExitoso) {
                     showError = true
                 }
             },
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF0070C0)),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Red),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("INGRESAR", color = Color.White)
+            Text("Ingresar", color = Color.White)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
             onClick = onNavigateToRegister,
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF002D72)),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             shape = MaterialTheme.shapes.extraSmall,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("¿NO TE HAS REGISTRADO? REGISTRATE AQUI", color = Color.White)
+            Text("¿No te has registrado? Registrate Aquí", color = Color.White)
         }
     }
 }

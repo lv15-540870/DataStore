@@ -27,7 +27,6 @@ fun AppNavigation() {
     val usuarioKey = stringPreferencesKey("usuario")
     val passwordKey = stringPreferencesKey("password")
 
-    // Leemos los datos actuales en tiempo real para poder validar el login
     val savedNombre by context.dataStore.data.map { it[nombreKey] ?: "" }.collectAsState(initial = "")
     val savedPassword by context.dataStore.data.map { it[passwordKey] ?: "" }.collectAsState(initial = "")
 
@@ -53,15 +52,13 @@ fun AppNavigation() {
                 LoginScreen(
                     onNavigateToRegister = { navController.navigate("registro") },
                     onLoginClick = { nombreIngresado, passwordIngresada ->
-                        // LÓGICA DE VALIDACIÓN
                         if (savedNombre.isEmpty() || savedPassword.isEmpty()) {
-                            false // No hay nadie registrado aún en el LocalStorage
+                            false
                         } else if (nombreIngresado == savedNombre && passwordIngresada == savedPassword) {
-                            // Los datos coinciden, redirigimos a Home
                             navController.navigate("home") { popUpTo("login") { inclusive = true } }
                             true
                         } else {
-                            false // Los datos no coinciden
+                            false
                         }
                     }
                 )
@@ -76,14 +73,18 @@ fun AppNavigation() {
                                 prefs[usuarioKey] = usuario
                                 prefs[passwordKey] = password
                             }
+                            android.widget.Toast.makeText(context, "¡Usuario registrado!", android.widget.Toast.LENGTH_SHORT).show()
                             navController.navigate("home") { popUpTo("login") { inclusive = true } }
                         }
                     }
                 )
             }
-
             composable("home") {
-                HomeScreen()
+                HomeScreen(
+                    onRegresar = {
+                        navController.navigate("login") { popUpTo("home") { inclusive = true } }
+                    }
+                )
             }
         }
     }

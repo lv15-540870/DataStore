@@ -1,6 +1,8 @@
 package com.atom.myapp.views
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -18,7 +20,7 @@ import com.atom.myapp.dataStore
 import kotlinx.coroutines.flow.map
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(onRegresar: () -> Unit) {
     val context = LocalContext.current
 
     val nombreFlow = context.dataStore.data.map { it[stringPreferencesKey("nombre")] ?: "N/A" }
@@ -28,19 +30,23 @@ fun HomeScreen() {
     val usuario by usuarioFlow.collectAsState(initial = "")
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(32.dp),
-        horizontalAlignment = Alignment.Start
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(32.dp),
+            horizontalAlignment = Alignment.Start
     ) {
-        Text(text = nombre.uppercase(), fontSize = 24.sp, fontWeight = FontWeight.Bold)
-        Text(text = usuario.uppercase(), fontSize = 14.sp)
-
-        Spacer(modifier = Modifier.height(60.dp))
-
+        Text(text = nombre.uppercase(),
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold)
+        Text(text = usuario.uppercase(),
+            fontSize = 14.sp)
+        Spacer(modifier = Modifier
+            .height(60.dp))
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("ESCANEA AQUÍ", fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            Text("Escanea Aquí", fontWeight = FontWeight.Bold, fontSize = 20.sp)
             Spacer(modifier = Modifier.height(16.dp))
 
             Icon(
@@ -49,6 +55,16 @@ fun HomeScreen() {
                 tint = Color.Unspecified,
                 modifier = Modifier.size(250.dp)
             )
+
+            Spacer(modifier = Modifier.height(30.dp))
+
+            Button(
+                onClick = onRegresar,
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Regresar", color = Color.White)
+            }
         }
     }
 }
