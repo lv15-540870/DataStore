@@ -70,4 +70,7 @@ dependencies {
 
     //--DataStore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Librería de iconos de Material Compose
+    implementation("androidx.compose.material:material-icons-extended")
 }
