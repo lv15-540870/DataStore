@@ -59,11 +59,15 @@ dependencies {
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 
-    //OnBoarding-01
+    //--On Boarding
+    implementation("com.google.accompanist:accompanist-pager:0.15.0")
 
-    implementation("com.google.accompanist:accompanist-paper:0.15.0")
+    //--Lottie Files
+    implementation("com.airbnb.android:lottie-compose:5.2.0")
 
-    implementation("com.airbnb,android:lottie-compose:5.2.0")
+    //--Navigation
+    implementation("androidx.navigation:navigation-compose:2.5.3")
 
-
+    //--DataStore
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }
